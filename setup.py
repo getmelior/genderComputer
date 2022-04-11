@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="genderComputer", 
+    name="genderComputer",
     version="0.1",
     author="tue-mdse",
     author_email="help@help.org",
@@ -23,6 +23,6 @@ setuptools.setup(
         'genderComputer': ['nameLists/*.*'],
     },
     include_package_data=True,
-    install_requires = ['unidecode==1.3.2','nameparser==1.0.6'],
+    install_requires=['unidecode>=1.3.2', 'nameparser>=1.0.6'],
     zip_safe=False
 )
