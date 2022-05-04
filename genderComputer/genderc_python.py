@@ -117,7 +117,7 @@ def rewrite(s):
     prefix = s[:len(s)-len(suffix)].strip()
     for key in charMap.keys():
         prefix = prefix.replace(key, charMap[key])
-    s = prefix + ' ' * (29-len(prefix)) + suffix  
+    s = prefix + ' ' * (29-len(prefix)) + suffix
     return s
 
 idx = 0
@@ -141,16 +141,16 @@ genderDict = {}
 
 idx = 0
 
-shortNames = []    
+shortNames = []
 for row in reader:
     if idx > 361:
         text = row[0]
         mf = text[:2].strip() # M,1M,?M, F,1F,?F, ?, =
-        #  =  <short_name> <long_name> 
+        #  =  <short_name> <long_name>
         name = text[2:29].lower().strip()
         sortingFlag = text[29] # +,-; ignore +
         frequencies = text[30:-2]
-    
+
         if sortingFlag != '+':
             if mf == '=':
                 shortNames.append([name, frequencies])
@@ -166,8 +166,8 @@ for row in reader:
                     else:
                         genderDict[name] = [[mf, frequencies]]
     idx += 1
-             
-    
+
+
 for [name, frequencies] in shortNames:
     shortName, longName = name.split()
     if shortName in genderDict and longName not in genderDict:
@@ -176,15 +176,14 @@ for [name, frequencies] in shortNames:
                 genderDict[longName].append(nameList)
             else:
                 genderDict[longName] = [nameList]
-            
+
     elif longName in genderDict and shortName not in genderDict:
         for nameList in genderDict[longName]:
             if shortName in genderDict:
                 genderDict[shortName].append(nameList)
             else:
                 genderDict[shortName] = [nameList]
-            
-print(len(genderDict.keys()), 'names in dictionary')
+
 
 
 import pickle
